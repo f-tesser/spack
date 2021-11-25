@@ -19,30 +19,17 @@ class Countdown(CMakePackage, CudaPackage):
     """
 
     homepage = "https://github.com/EEESlab/countdown"
-
-    # ----------------------------------------------------------------------- #
-    # The following two lines need the installation command: \"spack install
-    # --no-checksum countdown\", because by default, Spack will only install a
-    # tarball package if it has a checksum, and that checksum matches.
-
-    # url      = "https://github.com/EEESlab/countdown/archive/refs/" \
-    #            "heads/master.tar.gz"
-    # ----------------------------------------------------------------------- #
-
-    # ----------------------------------------------------------------------- #
-    # The following two lines need the installation command: \"spack install
-    # countdown\".
-
     git = "https://github.com/EEESlab/countdown.git"
-    branch = "master"
-    # ----------------------------------------------------------------------- #
 
     maintainers = [
         'f-tesser',
         'danielecesarini'
     ]
 
-    version('1.0.0')
+    version('1.0.0',
+            sha1='4b5199ff6c04aea56b7198f6de0d7a036040ed1a',
+            url="https://github.com/EEESlab/countdown/archive/refs/tags/v1.0.0.tar.gz"
+            )
 
     depends_on('cmake@3.0.0:', type='build')
     depends_on('hwloc', type='link')
@@ -94,17 +81,11 @@ class Countdown(CMakePackage, CudaPackage):
 
         sdfv = self.define_from_variant
         cmake_args = [
-            sdfv('CNTD_ENABLE_CUDA', 'cntd_enable_cuda'),
-            sdfv(
-                'CNTD_DISABLE_PROFILING_MPI',
-                'cntd_disable_profiling_mpi'
-            ),
-            sdfv('CNTD_DISABLE_P2P_MPI', 'cntd_disable_p2p_mpi'),
-            sdfv(
-                'CNTD_DISABLE_ACCESSORY_MPI',
-                'cntd_disable_accessory_mpi'
-            ),
-            sdfv('CNTD_ENABLE_DEBUG_MPI', 'cntd_enable_debug_mpi')
+            sdfv('CNTD_ENABLE_CUDA', 'cuda'),
+            sdfv('CNTD_DISABLE_PROFILING_MPI', 'disable_profiling_mpi'),
+            sdfv('CNTD_DISABLE_P2P_MPI', 'disable_p2p_mpi'),
+            sdfv('CNTD_DISABLE_ACCESSORY_MPI', 'disable_accessory_mpi'),
+            sdfv('CNTD_ENABLE_DEBUG_MPI', 'debug_mpi')
         ]
 
         # -------------------------------------------------------------------  #
